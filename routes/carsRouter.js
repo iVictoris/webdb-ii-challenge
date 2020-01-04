@@ -13,15 +13,15 @@ const validateCar = (req, res, next) => {
   const {vin, make, model, mileage} = body;
 
   if (!body) {
-    res
+    return res
       .status(400)
       .json({
       message: "No data sent at all. Please send required data."
     });
   }
 
-  if (!vin || !make || !model || mileage) {
-    res
+  if (!vin || !make || !model || !mileage) {
+    return res
       .status(400)
       .json({
       message: "VIN, Make, Model, and Mileage are all required. Please supply this information."
@@ -61,6 +61,7 @@ router
         .status(201)
         .json(car);
     } catch (error) {
+      console.log(error)
       res
         .status(500)
         .json({
